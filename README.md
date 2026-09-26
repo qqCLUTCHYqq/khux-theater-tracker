@@ -25,3 +25,8 @@ Do not delete `GameProfile` or clear its browser data: that removes saved progre
 All 332 entries from the supplied tracker are preserved. Checkboxes, Watch Next, search, and Remaining Only work in the browser. Checklist progress is saved separately on each device/browser; it is not synced. On iPhone, open the tracker in Safari and choose Share → Add to Home Screen.
 
 This is an unofficial fan setup helper and checklist, not affiliated with Square Enix or Disney.
+
+## Game speed and save editor
+
+[Read the complete editor guide](https://qqclutchyqq.github.io/khux-theater-tracker/editor-guide.html). It covers every field, Set, keep, Unlock, Refresh, save writing, backups, legacy currencies, and unmapped internal flags. An offline copy named editor-guide.html is included in the setup ZIP.
+
