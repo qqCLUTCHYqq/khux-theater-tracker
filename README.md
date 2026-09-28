@@ -24,9 +24,27 @@ Do not delete `GameProfile` or clear its browser data: that removes saved progre
 
 All 332 entries from the supplied tracker are preserved. Checkboxes, Watch Next, search, and Remaining Only work in the browser. Checklist progress is saved separately on each device/browser; it is not synced. On iPhone, open the tracker in Safari and choose Share → Add to Home Screen.
 
-This is an unofficial fan setup helper and checklist, not affiliated with Square Enix or Disney.
 
 ## Game speed and save editor
 
 [Read the complete editor guide](https://qqclutchyqq.github.io/khux-theater-tracker/editor-guide.html). It covers every field, Set, keep, Unlock, Refresh, save writing, backups, legacy currencies, and unmapped internal flags. An offline copy named editor-guide.html is included in the setup ZIP.
+## 🌙 Join Traverse Town
 
+Need setup help, found a bug, have a suggestion, or just want to follow Cross Road development?
+
+**[Join the Traverse Town Discord](https://discord.gg/jHWEkRdjJb)**
+
+Traverse Town is the community home for Cross Road and our future KINGDOM HEARTS projects.
+
+Come by for:
+
+- 🛠️ Setup help
+- 🐛 Bug reports and tracking
+- 💡 Suggestions and feature ideas
+- 📢 Cross Road updates
+- 🗝️ KINGDOM HEARTS discussion
+- 🔧 Future projects and development
+
+## Disclaimer
+
+Cross Road is an unofficial fan/community preservation project and is not affiliated with or endorsed by Square Enix or Disney.
