@@ -20,7 +20,7 @@ Game files are downloaded directly from [the Internet Archive preservation relea
 
 Do not delete `GameProfile` or clear its browser data: that removes saved progress/imported content. Close the game before backing up its installation folder. Rerunning setup preserves GameProfile, existing game files, and the existing shortcut. Different existing game files cause setup to stop safely. The bundled Chrome does not auto-update; use it for this local game only.
 
-## Windows installer 2.0.1 — October 8, 2026
+## Windows installer 2.0.1 â€” October 8, 2026
 
 One setup entry point, grouped support files, a clearer four-step window, Launch Game,
 Copy Content folder path and whole-profile save backup/restore instructions. Logs
@@ -33,7 +33,7 @@ Fresh installation/extraction, existing installation detection, real Archive res
 corruption/fallback fixtures, offline import/restart, Union chi menu and Dark Road startup,
 full-profile backup/restore and completion controls passed isolated testing. All 222 files
 of the existing imported profile were unchanged across setup rerun. No real saves were
-touched; full gameplay was not tested. The ZIP contains only seven installer/support files.
+touched; full gameplay was not tested. The ZIP contains only six installer/support files.
 
 - [Checksums](SHA256SUMS.txt)
 - [Release details and test limits](installer-release.html)
