@@ -7,9 +7,9 @@
 **[Download Windows Setup](https://qqclutchyqq.github.io/khux-theater-tracker/KHUX-Windows-Setup.zip)**
 
 1. Download the ZIP, right-click it and choose **Extract All**.
-2. Open the extracted folder and double-click **START SETUP.vbs** (START SETUP.cmd also works).
+2. Open the extracted folder and double-click **START SETUP.cmd**. Support files are grouped under App.
 3. Let setup finish downloading and extracting about 2.5 GB. Allow 10 GB free.
-4. The game and a first-run guide open. Click **Choose Files / Game folder**, select the **Content** folder shown in the guide, and confirm **Upload**. This imports files locally into the browser.
+4. Click **Launch Game** in the completion screen and **Copy Content folder path**. In the game, click **Choose Files / Game folder**, select the **Content** folder shown by setup, and confirm **Upload**. This imports files locally into the browser.
 5. After that, use **KINGDOM HEARTS UX + Dark Road** on your desktop.
 
 Requires 64-bit Windows 10/11, internet for setup, and PowerShell 5.1 or later. Setup installs under your own Local AppData folder, includes Google's official standalone Chrome, and creates a dedicated game profile. Administrator access is normally unnecessary. Initial content import is one manual step; setup does not bypass browser permission prompts.
@@ -20,19 +20,27 @@ Game files are downloaded directly from [the Internet Archive preservation relea
 
 Do not delete `GameProfile` or clear its browser data: that removes saved progress/imported content. Close the game before backing up its installation folder. Rerunning setup preserves GameProfile, existing game files, and the existing shortcut. Different existing game files cause setup to stop safely. The bundled Chrome does not auto-update; use it for this local game only.
 
-## Optimized Windows installer 2.0.0 — October 8, 2026
+## Windows installer 2.0.1 — October 8, 2026
 
-The existing download URL now provides the optimized installer. It contains setup scripts, checksum metadata, instructions, and the existing editor guide; **no game HTML, OBB, video, image, game archive, or browser executable is bundled**.
+One setup entry point, grouped support files, a clearer four-step window, Launch Game,
+Copy Content folder path and whole-profile save backup/restore instructions. Logs
+and configuration live under Setup. Existing game/profile/download paths and shortcuts
+remain unchanged. The optimized downloader is unchanged: verified Archive replicas,
+resumable chunks, adaptive 1/2/4 connections, retry/backoff, checksum checks and fallback.
+First import still requires one guided folder selection. Later launches use cached data.
 
-Downloads prefer verified Internet Archive storage replicas and include resumable chunks, adaptive one/two/four connections, retry/backoff, SHA256 verification, cache reuse, and a progress window with Pause. Complete verified installations skip downloads and extraction, including when less than 10 GB remains free. Fresh downloads/extraction still require 10 GB free.
+Fresh installation/extraction, existing installation detection, real Archive resume,
+corruption/fallback fixtures, offline import/restart, Union chi menu and Dark Road startup,
+full-profile backup/restore and completion controls passed isolated testing. All 222 files
+of the existing imported profile were unchanged across setup rerun. No real saves were
+touched; full gameplay was not tested. The ZIP contains only seven installer/support files.
 
-Testing covered a fresh install, real Archive interruption/resume, corrupt-cache recovery, fallback, extraction, shortcut preservation, and offline title-screen startup. All 222 files in an isolated imported browser profile were unchanged across an installer rerun. A measured near-full 2.08 GiB Content download plus combination/checksum took 7m09s, averaging 5.23 MB/s versus the original 149 KB/s sample (~35×); speeds vary by server and connection. Full gameplay/progressed-save round trips were not tested.
+- [Checksums](SHA256SUMS.txt)
+- [Release details and test limits](installer-release.html)
+- [2.0.0 rollback](KHUX-Windows-Setup-2.0.0.zip)
+- [Original legacy rollback](KHUX-Windows-Setup-Legacy.zip)
 
-- [Checksums](https://qqclutchyqq.github.io/khux-theater-tracker/SHA256SUMS.txt)
-- [Release details](https://qqclutchyqq.github.io/khux-theater-tracker/installer-release.html)
-- [Original installer rollback](https://qqclutchyqq.github.io/khux-theater-tracker/KHUX-Windows-Setup-Legacy.zip)
-
-The rollback ZIP is an exact copy of the public installer downloaded before this update. Close any old installer before running the new setup. Neither installer should be used to replace a modified game installation; keep the game profile and save data intact.
+Rollback replaces the setup helper only. Keep the installed game and GameProfile intact.
 
 ## Tracker
 
