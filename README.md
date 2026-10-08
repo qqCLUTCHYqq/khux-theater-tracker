@@ -2,9 +2,17 @@
 
 [Open the 332-entry Theater Tracker](https://qqclutchyqq.github.io/khux-theater-tracker/)
 
-## Get the game on Windows
+## Download
 
-**[Download Windows Setup](https://qqclutchyqq.github.io/khux-theater-tracker/KHUX-Windows-Setup.zip)**
+**[Download the latest stable Windows installer](https://github.com/qqCLUTCHYqq/khux-theater-tracker/releases/latest/download/KHUX-Windows-Setup.zip)**
+
+[Release notes and all downloads](https://github.com/qqCLUTCHYqq/khux-theater-tracker/releases/latest) ·
+[2.0.0 rollback](https://github.com/qqCLUTCHYqq/khux-theater-tracker/releases/download/v2.0.1/KHUX-Windows-Setup-2.0.0.zip)
+
+Installer SHA256: `1179a56f31522084eba6df84d5547cb840bae4cc708bb09c535639df47f06e20`.
+Extract the ZIP and run **START SETUP.cmd**. The ZIP includes only the setup helper and
+permitted support files; game files and browser binaries are downloaded separately.
+After an interruption, run the same launcher again to resume. Existing saves are preserved.
 
 1. Download the ZIP, right-click it and choose **Extract All**.
 2. Open the extracted folder and double-click **START SETUP.cmd**. Support files are grouped under App.
@@ -37,7 +45,7 @@ touched; full gameplay was not tested. The ZIP contains only six installer/suppo
 
 - [Checksums](SHA256SUMS.txt)
 - [Release details and test limits](installer-release.html)
-- [2.0.0 rollback](KHUX-Windows-Setup-2.0.0.zip)
+- [2.0.0 rollback](https://github.com/qqCLUTCHYqq/khux-theater-tracker/releases/download/v2.0.1/KHUX-Windows-Setup-2.0.0.zip)
 - [Original legacy rollback](KHUX-Windows-Setup-Legacy.zip)
 
 Rollback replaces the setup helper only. Keep the installed game and GameProfile intact.
