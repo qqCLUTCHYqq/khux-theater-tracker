@@ -1,0 +1,2 @@
+3a0bd55dcea5bb814e16307999ab3d62b640ee6f67a0006f6eea694486a24b6c  KHUX-Windows-Setup.zip
+a470568aeeb9b431ab58690f23d1bde37100f8c8a784a00151a9ed34c9ddc8d9  KHUX-Windows-Setup-Legacy.zip
