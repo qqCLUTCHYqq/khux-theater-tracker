@@ -51,7 +51,22 @@ jobs:
       - name: Create preview draft and verify uploaded assets
         run: |
           if gh release view "$TAG" >/dev/null 2>&1; then
-            test "$(gh release view "$TAG" --json isDraft --jq .isDraft)" = true
+            if test "$(gh release view "$TAG" --json isDraft --jq .isDraft)" = false; then
+              gh api "repos/$GH_REPO/releases/tags/$TAG" > "$RUNNER_TEMP/existing-preview.json"
+              python3 - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          import os
+          release=json.loads((Path(os.environ['RUNNER_TEMP'])/'existing-preview.json').read_text())
+          root=Path('.github/release-assets/v2.1.1-preview.1')
+          assert release['prerelease'] and not release['draft']
+          assert {a['name'] for a in release['assets']}=={p.name for p in root.iterdir()}
+          for a in release['assets']:
+            assert a['digest']=='sha256:'+hashlib.sha256((root/a['name']).read_bytes()).hexdigest()
+          PY
+              gh release edit "$TAG" --prerelease --latest=false --notes-file .github/release-notes/v2.1.1-preview.1.md
+              exit 0
+            fi
           else
             gh release create "$TAG" --draft --prerelease --latest=false --target "$GITHUB_SHA" --title 'Cross Road Launcher Recovery 2.1.1 - Preview' --notes-file .github/release-notes/v2.1.1-preview.1.md
           fi
