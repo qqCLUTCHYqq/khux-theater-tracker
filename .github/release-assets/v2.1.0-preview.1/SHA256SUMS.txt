@@ -1,0 +1,4 @@
+447218eb2a0fd1496955b1fdbcd7492fcd133c77affaff7f538ca16e4a5bc9ec  CrossRoad-Update.json
+0b0b4bdf11e80f10ce39b2c813679d1bb674a4e99d633e3e2f718535fdc30f37  CrossRoad-Update.zip
+8516e92181023c8f335e5b89a172a596190ed349d134f79d3e278b40611a5370  CrossRoad-Updater-Bootstrap-2.1.0-preview.zip
+ce81ab0bde51442dd849b9555569cdbec3e9c4b697726d971ae32cd559a6b444  KHUX-Windows-Setup-2.1.0-preview.zip

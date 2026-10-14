@@ -1,0 +1,88 @@
+name: Publish Cross Road updater preview 1
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/publish-updater-preview-1.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: cross-road-updater-preview-1
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: qqCLUTCHYqq/khux-theater-tracker
+      TAG: v2.1.0-preview.1
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Audit exact preview files before upload
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,zipfile
+          from pathlib import Path
+          root=Path('.github/release-assets/v2.1.0-preview.1')
+          pins={
+            'CrossRoad-Update.json':'447218eb2a0fd1496955b1fdbcd7492fcd133c77affaff7f538ca16e4a5bc9ec',
+            'CrossRoad-Update.zip':'0b0b4bdf11e80f10ce39b2c813679d1bb674a4e99d633e3e2f718535fdc30f37',
+            'CrossRoad-Updater-Bootstrap-2.1.0-preview.zip':'8516e92181023c8f335e5b89a172a596190ed349d134f79d3e278b40611a5370',
+            'KHUX-Windows-Setup-2.1.0-preview.zip':'ce81ab0bde51442dd849b9555569cdbec3e9c4b697726d971ae32cd559a6b444',
+            'SHA256SUMS.txt':'0fe02508368070148707ff153e4b893962c253c93469cc8144d0a24b8562792b'}
+          app={'Bootstrap-UI.ps1','Bootstrap.ps1','Browser.ps1','Core.ps1','README.txt','Start.ps1','UI.ps1','version.json'}
+          payload={'Updater/'+p for p in ['Browser.ps1','Core.ps1','README.txt','UI.ps1','version.json']}
+          allowed={
+            'CrossRoad-Update.zip':payload,
+            'CrossRoad-Updater-Bootstrap-2.1.0-preview.zip':{'ADD UPDATER.cmd','README.txt'}|{'App/'+p for p in app},
+            'KHUX-Windows-Setup-2.1.0-preview.zip':{'README.txt','START SETUP.cmd','App/Content-manifest.json','App/Downloader.cs','App/editor-guide.html','App/Install-KHUX.ps1'}|{'App/Updater/'+p for p in app}}
+          assert {p.name for p in root.iterdir()}==set(pins)
+          for name,digest in pins.items():
+            assert hashlib.sha256((root/name).read_bytes()).hexdigest()==digest,name
+            if name in allowed:
+              with zipfile.ZipFile(root/name) as z:
+                assert z.testzip() is None and set(z.namelist())==allowed[name] and len(z.namelist())==len(allowed[name]),name
+          manifest=json.loads((root/'CrossRoad-Update.json').read_text())
+          assert manifest['application']=='cross-road-windows' and manifest['version']=='2.1.0'
+          with zipfile.ZipFile(root/'CrossRoad-Update.zip') as z:
+            assert {f['path'] for f in manifest['files']}==payload
+            for f in manifest['files']:
+              data=z.read(f['path']);assert len(data)==f['size'] and hashlib.sha256(data).hexdigest()==f['sha256']
+          PY
+      - name: Create preview draft and verify uploaded assets
+        run: |
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            test "$(gh release view "$TAG" --json isDraft --jq .isDraft)" = true
+          else
+            gh release create "$TAG" --draft --prerelease --latest=false --target "$GITHUB_SHA" --title 'Cross Road updater 2.1.0 - Preview 1' --notes-file .github/release-notes/v2.1.0-preview.1.md
+          fi
+          gh release upload "$TAG" .github/release-assets/v2.1.0-preview.1/* --clobber
+          mkdir -p "$RUNNER_TEMP/preview-verify"
+          gh release download "$TAG" --dir "$RUNNER_TEMP/preview-verify"
+          (cd "$RUNNER_TEMP/preview-verify" && sha256sum -c SHA256SUMS.txt)
+          gh release edit "$TAG" --draft=false --prerelease --latest=false --notes-file .github/release-notes/v2.1.0-preview.1.md
+      - name: Verify anonymous public download URLs and API digests
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,urllib.request
+          from pathlib import Path
+          repo='qqCLUTCHYqq/khux-theater-tracker';tag='v2.1.0-preview.1'
+          request=urllib.request.Request(f'https://api.github.com/repos/{repo}/releases/tags/{tag}',headers={'User-Agent':'CrossRoad-preview-verification'})
+          release=json.load(urllib.request.urlopen(request,timeout=60))
+          assert release['prerelease'] and not release['draft']
+          root=Path('.github/release-assets')/tag
+          assert {a['name'] for a in release['assets']}=={p.name for p in root.iterdir()}
+          for asset in release['assets']:
+            expected=hashlib.sha256((root/asset['name']).read_bytes()).hexdigest()
+            assert asset['digest']=='sha256:'+expected
+            url=f"https://github.com/{repo}/releases/download/{tag}/{asset['name']}"
+            assert asset['browser_download_url']==url
+            data=urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'CrossRoad-preview-verification'}),timeout=60).read()
+            assert hashlib.sha256(data).hexdigest()==expected and len(data)==asset['size']
+            print(asset['name'],expected,url)
+          latest=json.load(urllib.request.urlopen(urllib.request.Request(f'https://api.github.com/repos/{repo}/releases/latest',headers={'User-Agent':'CrossRoad-preview-verification'}),timeout=60))
+          assert latest['tag_name']!=tag
+          print('Stable latest channel remains:',latest['tag_name'])
+          print('Preview release:',release['html_url'])
+          PY
