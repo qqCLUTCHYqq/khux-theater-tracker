@@ -1,0 +1,33 @@
+{
+    "saveSchemaCompatible":  true,
+    "files":  [
+                  {
+                      "path":  "Updater/Core.ps1",
+                      "sha256":  "9a29af8be3ff2f36b3a6428ea9a5c7e9876e39f8400515a6d5537e03813aeed5",
+                      "size":  24355
+                  },
+                  {
+                      "path":  "Updater/UI.ps1",
+                      "sha256":  "b145ff3861742eba2c8b2d64ef712ebd5f49bae401a1ae1aa02cf4293b2f9690",
+                      "size":  9240
+                  },
+                  {
+                      "path":  "Updater/Browser.ps1",
+                      "sha256":  "cf5d745a0225aaa1e9a31130e2a213e9ee78908812192c98bbf24f73ec1df94f",
+                      "size":  7103
+                  },
+                  {
+                      "path":  "Updater/version.json",
+                      "sha256":  "1499a1ae9c22dda1aa79c44e02ebff4a67e7eb0c8387e7fea01fe2ebd1c57813",
+                      "size":  154
+                  },
+                  {
+                      "path":  "Updater/README.txt",
+                      "sha256":  "eaef134b2ac2c49ca7f142c55cab92184d0853c978c73345afac6a6214f026c4",
+                      "size":  2550
+                  }
+              ],
+    "schema":  1,
+    "version":  "2.1.1",
+    "application":  "cross-road-windows"
+}
